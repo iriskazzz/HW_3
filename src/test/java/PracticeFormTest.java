@@ -13,11 +13,12 @@ public class PracticeFormTest {
   static void configure() {
     Configuration.pageLoadStrategy = "eager";
     Configuration.browserSize = "765x768";
+    Configuration.baseUrl = "https://demoqa.com";
   }
 
   @Test
   void fillFormTest() {
-    open("https://demoqa.com/automation-practice-form");
+    open("/automation-practice-form");
 
     executeJavaScript("$('#fixedban').remove()");
     executeJavaScript("$('footer').remove()");
@@ -32,7 +33,6 @@ public class PracticeFormTest {
     $(".react-datepicker__year-select").selectOption("1995");
     $(".react-datepicker__day--0" + "15" + ":not(.react-datepicker__day--outside-month)").click();
     $("#subjectsInput").setValue("Economics").pressEnter();
-    $("#hobbiesWrapper").scrollTo();
     $("#hobbiesWrapper").$(byText("Music")).click();
     $("#uploadPicture").uploadFromClasspath("test.pdf");
     $("#currentAddress").setValue("Sochi");
@@ -44,16 +44,15 @@ public class PracticeFormTest {
     $("#submit").click();
 
     $(".modal-dialog").should(appear);
-    $(".table-responsive").shouldHave(
-            text("Irina Petrova"),
-            text("ira@ya.ru"),
-            text("Female"),
-            text("1234567889"),
-            text("15 April,1995"),
-            text("Economics"),
-            text("Music"),
-            text("test.pdf"),
-            text("Sochi"),
-            text("Haryana Karnal"));
+    $(".table-responsive").shouldHave(text("Irina Petrova"));
+    $(".table-responsive").shouldHave(text("ira@ya.ru"));
+    $(".table-responsive").shouldHave(text("Female"));
+    $(".table-responsive").shouldHave(text("1234567889"));
+    $(".table-responsive").shouldHave(text("15 April,1995"));
+    $(".table-responsive").shouldHave(text("Economics"));
+    $(".table-responsive").shouldHave(text("Music"));
+    $(".table-responsive").shouldHave(text("test.pdf"));
+    $(".table-responsive").shouldHave(text("Sochi"));
+    $(".table-responsive").shouldHave(text("Haryana Karnal"));
   }
 }
